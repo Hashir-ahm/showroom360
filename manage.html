@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath d=%22M3 4l9 9 9-9v12l-9 6-9-6z%22 fill=%22%23e12753%22/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef0f3">
+<title>Manage Cars · 360 Showroom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Inter+Tight:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=202610291830">
+</head>
+<body>
+<div class="page">
+  <header class="nav">
+    <a class="brand" href="index.html" aria-label="Home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">showroom<b>360</b></span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="index.html#showroom">Virtual showroom</a>
+      <a href="manage.html" aria-current="page">Manage cars</a>
+    </nav>
+    <a class="btn btn-dark" href="index.html#showroom">Open viewer <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+  </header>
+
+  <section class="hero card">
+    <span class="tag">Car library</span>
+    <h1><span class="grad">Manage</span> your cars</h1>
+    <p class="sub">Every car in the showroom, what it can do, and the place to add or remove them.</p>
+    <p class="hint" id="summary">Loading…</p>
+  </section>
+
+  <section class="card mg-upload" aria-labelledby="upTitle">
+    <div class="mg-upload-text">
+      <h2 id="upTitle">Add a car</h2>
+      <p id="upInfo">Upload a video of <b>one full turn</b> of the car. It's turned into a 360° spin and saved in this browser on this computer; the video never leaves the computer.</p>
+    </div>
+    <form class="mg-form" id="upForm">
+      <label class="drop" id="drop">
+        <input type="file" id="upFile" accept="video/*">
+        <svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+        <span id="dropText"><b>Choose a video</b> or drop it here</span>
+      </label>
+      <label class="field"><span>Car name</span><input type="text" id="upName" maxlength="60" placeholder="e.g. BMW X5 · 2024"></label>
+      <button class="btn btn-accent" id="upBtn" type="submit" disabled>Add to showroom <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      <div class="mg-progress" id="upProgress" hidden><div class="bar"><span id="upBar"></span></div><p id="upText"></p></div>
+    </form>
+  </section>
+
+  <section class="mg-section" aria-labelledby="carsTitle">
+    <h2 class="mg-h" id="carsTitle">In the showroom</h2>
+    <div class="mg-grid" id="carGrid"></div>
+  </section>
+
+  <section class="mg-section" id="removedSection" hidden aria-labelledby="remTitle">
+    <div class="mg-h-row"><h2 class="mg-h" id="remTitle">Removed</h2><button class="link-btn" id="restoreAll" type="button">Restore all</button></div>
+    <div class="mg-grid" id="removedGrid"></div>
+  </section>
+
+  <p class="foot" id="footNote">Built-in cars ship with the viewer and can only be hidden. Uploaded cars are saved in this browser only — another browser or computer won't see them, and clearing the browser's site data deletes them.</p>
+</div>
+<dialog class="ask-dialog" id="askDialog" aria-labelledby="askTitle">
+  <form id="askForm" novalidate>
+    <h3 id="askTitle"></h3>
+    <p id="askText"></p>
+    <label class="field" id="askPwRow" hidden><span>Admin password</span><input type="password" id="askPw" autocomplete="current-password"></label>
+    <label class="field" id="askValueRow" hidden><span>Name</span><input type="text" id="askValue" maxlength="60"></label>
+    <p class="ask-error" id="askError" role="alert" hidden></p>
+    <div class="ask-actions"><button type="button" class="mg-btn" id="askCancel">Cancel</button><button type="submit" class="mg-btn primary" id="askOk">OK</button></div>
+  </form>
+</dialog>
+<script>/* Where shared uploads are kept (deploy/worker). Empty: uploads stay in this browser only. */
+window.SHOWROOM_API = 'https://showroom360-api.hashirahmedaurangzeb.workers.dev/api';</script>
+<script src="cars/index.js?v=202610291830"></script>
+<script src="storage.js?v=202610291830"></script>
+<script src="manage-local.js?v=202610291830"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath d=%22M3 4l9 9 9-9v12l-9 6-9-6z%22 fill=%22%23e12753%22/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef0f3">
+<title>360 Showroom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Inter+Tight:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=202610291830">
+</head>
+<body>
+<div class="page">
+  <header class="nav">
+    <a class="brand" href="./" aria-label="Home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">showroom<b>360</b></span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#showroom">Virtual showroom</a>
+      <a href="#how">How it works</a>
+      <a href="manage.html">Manage cars</a>
+    </nav>
+    <a class="btn btn-dark" href="#showroom">Explore cars <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+  </header>
+
+  <section class="hero card">
+    <span class="tag">Interactive 360° viewer</span>
+    <h1><span class="grad">Every angle,</span><br>one drag away</h1>
+    <p class="sub">Drag to rotate. Tap a dot or a part to take a closer look.</p>
+    <p class="hint" id="status">Loading…</p>
+  </section>
+
+  <section class="config" id="showroom" aria-label="Virtual showroom">
+    <div class="config-inner">
+      <aside class="side">
+        <div class="panel">
+          <h3>Select Vehicle</h3>
+          <div class="car-list" id="carList"></div>
+          <a class="manage-link" href="manage.html">
+            <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>Manage cars · add or remove
+          </a>
+        </div>
+      </aside>
+
+      <div class="viewer" id="viewer">
+        <div class="stage-wrap">
+          <div class="stage" id="stage">
+            <canvas id="frame" width="1280" height="720"></canvas>
+            <div class="door-layer" id="doorLayer"></div>
+            <div class="hotspots" id="hotspots"></div>
+          </div>
+        </div>
+
+        <div class="cabin" id="cabin" hidden>
+          <img class="cabin-photo" id="cabinPhoto" alt="Interior view">
+        </div>
+
+        <div class="viewer-label"><span class="live-dot" aria-hidden="true"></span><span id="vehicleName"></span></div>
+
+        <div class="loader" id="loader"><div class="bar"><span id="loadBar"></span></div></div>
+        <div class="drag-hint" id="dragHint"><svg viewBox="0 0 24 24"><path d="M8 12h8M5 12l3-3M5 12l3 3M19 12l-3-3M19 12l-3 3"/></svg>Drag to spin</div>
+
+        <aside class="info" id="info" aria-live="polite">
+          <p class="info-eyebrow" id="infoGroup"></p>
+          <h2 id="infoTitle"></h2>
+          <p id="infoText"></p>
+          <div class="info-photos" id="infoPhotos"></div>
+          <ul id="infoSpecs"></ul>
+          <button class="btn btn-accent back" id="backBtn" type="button">Back to 360° <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg></span></button>
+        </aside>
+
+        <div class="viewer-tools">
+          <button class="tool play" id="autoBtn" type="button" aria-label="Play 360° spin">
+            <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg>
+            <span class="play-label">Play 360°</span>
+          </button>
+          <button class="tool" id="dotsBtn" type="button" title="Show / hide hotspots" aria-label="Toggle hotspots">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/></svg>
+          </button>
+          <button class="tool" id="fsBtn" type="button" title="Fullscreen" aria-label="Fullscreen">
+            <svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="panel strip-panel">
+        <h3>Select Angle</h3>
+        <div class="angles" id="angles"></div>
+      </div>
+
+      <nav class="panel parts" id="parts" aria-label="Vehicle parts"></nav>
+
+      <div class="panel photos-panel" id="photosPanel" hidden>
+        <h3>Photos</h3>
+        <div class="photo-strip" id="photoStrip"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how card" id="how">
+    <div class="how-item"><span class="how-num">01</span><h4>Film one turn</h4><p>A single 360° spin video of the car.</p></div>
+    <div class="how-item"><span class="how-num">02</span><h4>Automatic processing</h4><p>One clean rotation, one sharp view per degree.</p></div>
+    <div class="how-item"><span class="how-num">03</span><h4>Interactive showroom</h4><p>Drag, jump to an angle, explore the parts.</p></div>
+  </section>
+
+  <p class="foot">Demo build · 360 views per car, one per degree.</p>
+</div>
+
+<script>/* Where shared uploads are kept (deploy/worker). Empty: uploads stay in this browser only. */
+window.SHOWROOM_API = 'https://showroom360-api.hashirahmedaurangzeb.workers.dev/api';</script>
+<script src="cars/index.js?v=202610291830"></script>
+<script src="storage.js?v=202610291830"></script>
+<script src="boot.js?v=202610291830"></script>
+</body>
+</html>
