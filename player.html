@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath d=%22M3 4l9 9 9-9v12l-9 6-9-6z%22 fill=%22%23e12753%22/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef0f3">
+<title>Web Player · 360 Showroom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Inter+Tight:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=202611021931">
+<link rel="stylesheet" href="player.css?v=202611021931">
+</head>
+<body class="pg">
+<header class="pg-head">
+  <a class="brand" href="index.html" aria-label="Showroom home">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">showroom<b>360</b></span>
+  </a>
+  <div class="pg-title"><b>360 Web Player <span class="pg-ver" id="ver"></span></b><small>Properties playground</small></div>
+  <nav class="pg-links"><a href="index.html#showroom">Showroom</a><a href="manage.html">Manage cars</a></nav>
+  <button class="pg-chip" id="resizeBtn" type="button" aria-pressed="false">
+    <svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 15v5h-5M4 4l7 7M20 20l-7-7"/></svg>Resizable stage
+  </button>
+</header>
+
+<main class="pg-main">
+  <div class="pg-left">
+    <section class="pg-card pg-stage-card">
+      <div class="pg-stage" id="stage">
+        <showroom-360 id="player"></showroom-360>
+        <span class="pg-grip tl" data-dir="-1" aria-hidden="true"></span><span class="pg-grip tr" data-dir="1" aria-hidden="true"></span>
+        <span class="pg-grip bl" data-dir="-1" aria-hidden="true"></span><span class="pg-grip br" data-dir="1" aria-hidden="true"></span>
+        <span class="pg-size" id="stageSize"></span>
+      </div>
+      <div class="pg-stage-bar">
+        <p class="pg-note" id="stageNote"><b>Fixed size.</b> Turn on “Resizable stage” to drag the player narrower and test small layouts.</p>
+        <div class="pg-minmax" id="minmax" hidden>
+          <label>Min <input type="number" id="minW" value="280" min="200" step="10"> px</label>
+          <label>Max <input type="number" id="maxW" value="1200" min="240" step="10"> px</label>
+        </div>
+      </div>
+    </section>
+
+    <section class="pg-card" id="secMethods">
+      <h3 class="pg-h">Methods</h3>
+      <div class="pg-methods" id="methods"></div>
+      <pre class="pg-result" id="methodOut" hidden></pre>
+    </section>
+
+    <section class="pg-card" id="secEvents">
+      <div class="pg-h-row"><h3 class="pg-h">Events</h3><button class="pg-mini" type="button" id="clearEvents">clear</button></div>
+      <div class="pg-log" id="events"><span class="pg-dim" id="eventsHint">Events from the player appear here: drag the car, open a part…</span></div>
+    </section>
+
+    <section class="pg-card" id="secAnalytics">
+      <div class="pg-h-row"><h3 class="pg-h">Analytics <span class="pg-h-sub">(preview, never sent)</span></h3><button class="pg-mini" type="button" id="clearAnalytics">clear</button></div>
+      <div class="pg-log" id="analytics"><span class="pg-dim" id="analyticsHint">What your analytics would receive: drag the car, open a part, zoom… Turn on the <code>analytics</code> property to get these events on your own page.</span></div>
+    </section>
+
+    <section class="pg-card" id="secEmbed">
+      <div class="pg-h-row"><h3 class="pg-h">Embed</h3><button class="pg-mini" type="button" id="copyEmbed">copy</button></div>
+      <pre class="pg-code" id="embed"></pre>
+      <p class="pg-note">The addresses always point to the live site (hashir-ahm.github.io/showroom360), so publish first with <code>publish.bat</code>. Paste into any page: the addresses are absolute and only the properties you changed are listed. In React, Angular, Vue and similar, load the script once (e.g. in <code>index.html</code>) and use <code>&lt;showroom-360&gt;</code> like any element; in Angular add <code>CUSTOM_ELEMENTS_SCHEMA</code> to the module.</p>
+    </section>
+  </div>
+
+  <aside class="pg-card pg-props">
+    <div class="pg-props-head">
+      <h3>Properties <span class="pg-count" id="propCount"></span></h3>
+      <button class="pg-reset" type="button" id="reset"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>Reset to defaults</button>
+    </div>
+    <label class="pg-filter"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg><input id="filter" placeholder="Filter properties…" type="search"></label>
+    <p class="pg-label">Page sections</p>
+    <div class="pg-sections" id="sections"></div>
+    <div class="pg-groups" id="groups"></div>
+    <div class="pg-props-foot"><span>Powered by <b>showroom<span>360</span></b></span><span id="footVer"></span></div>
+  </aside>
+</main>
+
+<script src="cars/index.js?v=202611021931"></script>
+<script src="player/showroom360.js?v=202611021931"></script>
+<script src="player-playground.js?v=202611021931"></script>
+</body>
+</html>

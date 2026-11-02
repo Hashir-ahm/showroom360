@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>360 Player</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Inter+Tight:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=202611021931">
+</head>
+<!-- The player shown inside the <showroom-360> element (player/showroom360.js). Car and options come from the
+     address: embed.html?car=<id>&o=<json options>. -->
+<body class="embed">
+<div class="viewer" id="viewer">
+  <div class="stage-wrap">
+    <div class="stage" id="stage">
+      <canvas id="frame" width="1280" height="720"></canvas>
+      <div class="door-layer" id="doorLayer"></div>
+      <div class="hotspots" id="hotspots"></div>
+    </div>
+  </div>
+
+  <div class="cabin" id="cabin" hidden>
+    <img class="cabin-photo" id="cabinPhoto" alt="Interior view">
+  </div>
+
+  <div class="viewer-label"><span class="live-dot" aria-hidden="true"></span><span id="vehicleName"></span></div>
+
+  <div class="loader" id="loader"><div class="bar"><span id="loadBar"></span></div></div>
+  <div class="drag-hint" id="dragHint"><svg viewBox="0 0 24 24"><path d="M8 12h8M5 12l3-3M5 12l3 3M19 12l-3-3M19 12l-3 3"/></svg>Drag to spin</div>
+
+  <aside class="info" id="info" aria-live="polite">
+    <p class="info-eyebrow" id="infoGroup"></p>
+    <h2 id="infoTitle"></h2>
+    <p id="infoText"></p>
+    <div class="info-photos" id="infoPhotos"></div>
+    <ul id="infoSpecs"></ul>
+    <button class="btn btn-accent back" id="backBtn" type="button">Back to 360° <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg></span></button>
+  </aside>
+
+  <div class="viewer-tools">
+    <button class="tool play" id="autoBtn" type="button" aria-label="Play 360° spin">
+      <svg class="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+      <svg class="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg>
+      <span class="play-label">Play 360°</span>
+    </button>
+    <button class="tool" id="dotsBtn" type="button" title="Show / hide hotspots" aria-label="Toggle hotspots">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/></svg>
+    </button>
+    <button class="tool" id="fsBtn" type="button" title="Fullscreen" aria-label="Fullscreen">
+      <svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>
+    </button>
+  </div>
+</div>
+
+<nav class="parts" id="parts" aria-label="Vehicle parts"></nav>
+<a class="powered" href="./" target="_blank" rel="noopener">Powered by <b>showroom<span>360</span></b></a>
+
+<!-- unused here, kept so the shared viewer code finds them -->
+<p id="status" hidden></p>
+<div id="photosPanel" hidden><div id="photoStrip"></div></div>
+
+<script src="cars/index.js?v=202611021931"></script>
+<script src="embed-boot.js?v=202611021931"></script>
+</body>
+</html>
